@@ -1,24 +1,25 @@
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
+import PaginaPrincipal from './pages/PaginaPrincipal'
+import Ingreso from './pages/ingresos/Ingreso'
+import Egreso from './pages/egresos/Egreso'
+import LoginUsuario from './pages/usuario/LoginUsuario';
+import Concepto from './pages/conceptos/Concepto';
+
+
 
 function App() {
+
   return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <p>Choo Choo! This is an example of a Vite + React app running on Railway.</p>
-      </div>
-    </>
-  )
+    <Router>
+      <Routes>
+        <Route path="/" element={<LoginUsuario />} />
+        <Route path="/paginaPrincipal" element={<PaginaPrincipal />} />
+        <Route path="/ingresos" element={<Ingreso />} />
+        <Route path="/egresos" element={<Egreso />} />
+        <Route path="/conceptos" element={<Concepto />} />
+      </Routes>
+    </Router>
+  );
 }
 
-export default App
+export default App;
