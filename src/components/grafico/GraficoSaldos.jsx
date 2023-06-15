@@ -4,7 +4,7 @@ import { Chart, LineElement, PointElement, LinearScale, Title } from 'chart.js';
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { BACKEND_URL } from '../../config/url';
-import {Spinner} from '../../helpers/spinner';
+import {Spinner} from '../../helpers/Spinner';
 
 const GraficoSaldos = () => {
   ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale);
