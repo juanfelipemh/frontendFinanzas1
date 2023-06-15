@@ -9,7 +9,7 @@ import { formatearMoneda } from '../../helpers/formatoMoneda'
 import GraficoEgresos from '../grafico/GraficoEgresos'
 import Paginacion from '../../helpers/Paginacion'
 import { BACKEND_URL } from '../../config/url'
-import {Spinner} from '../../helpers/spinner'
+import {Spinner} from '../../helpers/Spinner'
 import {LoadingData} from '../../helpers/LoadingData'
 
 
