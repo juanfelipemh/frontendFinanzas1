@@ -10,6 +10,8 @@ import { formatearMoneda } from "../../helpers/formatoMoneda"
 import GraficoPagPrinc from "../grafico/GraficoPagPrinc"
 import Paginacion from "../../helpers/Paginacion"
 import { BACKEND_URL } from "../../config/url"
+import Spinner from "../../helpers/spinner"
+import LoadingData from "../../helpers/LoadingData"
 
 const Resultado = () => {
 
@@ -151,7 +153,12 @@ const Resultado = () => {
                 <div className="presupuesto">
                     <div className="presupuesto_titulo">Saldo Disponible:</div>
                     <div className="presupuesto_valor">
-                        {formatearMoneda(resultado)}
+                        {resultado ? (
+                            formatearMoneda(resultado)
+                        ) : (
+                            <Spinner />
+                        )
+                        }
                     </div>
                 </div>
             </div>
@@ -174,31 +181,35 @@ const Resultado = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginacionData.map((gasto) => (
-                            <tr key={gasto.UUID}>
-                                <td>{formatearMoneda(gasto.valor)}</td>
-                                <td className="ocultar">{gasto.concepto}</td>
-                                <td className="ocultar">{gasto.observacion}</td>
-                                <td className="ocultar">{gasto.fecha}</td>
-                                <td>
-                                    <button onClick={() => handleOpenModalEditar(gasto.UUID)} className="btn-editar">
-                                        Editar
-                                    </button>
-                                    <ModalEditarGasto isOpen={modalOpenEdit} onClose={handleCloseModalEditar} gastoId={gastoId} />
-                                </td>
-                                <td>
-                                    <button className="btn-eliminar" onClick={() => handleClick(gasto.UUID)}>Eliminar</button>
-                                </td>
-                                <td>
-                                    <button onClick={() => handleOpenModalDetalle(gasto.UUID)} className="btn-detalle">
-                                        Detalle
-                                    </button>
-                                    <ModalGasto isOpen={modalOpenDetalle} onClose={handleCloseModalDetalle}
-                                        gastoId={gastoId} />
-                                </td>
-                            </tr>
-                        ))}
-
+                        {gastosFijos != 0 ? (
+                            paginacionData.map((gasto) => (
+                                <tr key={gasto.UUID}>
+                                    <td>{formatearMoneda(gasto.valor)}</td>
+                                    <td className="ocultar">{gasto.concepto}</td>
+                                    <td className="ocultar">{gasto.observacion}</td>
+                                    <td className="ocultar">{gasto.fecha}</td>
+                                    <td>
+                                        <button onClick={() => handleOpenModalEditar(gasto.UUID)} className="btn-editar">
+                                            Editar
+                                        </button>
+                                        <ModalEditarGasto isOpen={modalOpenEdit} onClose={handleCloseModalEditar} gastoId={gastoId} />
+                                    </td>
+                                    <td>
+                                        <button className="btn-eliminar" onClick={() => handleClick(gasto.UUID)}>Eliminar</button>
+                                    </td>
+                                    <td>
+                                        <button onClick={() => handleOpenModalDetalle(gasto.UUID)} className="btn-detalle">
+                                            Detalle
+                                        </button>
+                                        <ModalGasto isOpen={modalOpenDetalle} onClose={handleCloseModalDetalle}
+                                            gastoId={gastoId} />
+                                    </td>
+                                </tr>
+                            ))) : (
+                            <div style={{ padding: "10px 0" }}>
+                                <LoadingData />
+                            </div>
+                        )}
                     </tbody>
                 </table>
                 <div className="paginacion">

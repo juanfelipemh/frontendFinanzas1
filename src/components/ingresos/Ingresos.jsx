@@ -9,6 +9,8 @@ import { formatearMoneda } from '../../helpers/formatoMoneda'
 import GraficoIngresos from '../grafico/GraficoIngresos'
 import Paginacion from '../../helpers/Paginacion'
 import { BACKEND_URL } from '../../config/url'
+import Spinner from '../../helpers/spinner'
+import LoadingData from '../../helpers/LoadingData'
 
 const Ingresos = () => {
 
@@ -138,7 +140,11 @@ const Ingresos = () => {
                 <div className="ingreso">
                     <div className="ingreso_titulo">Ingresos Totales:</div>
                     <div className="ingreso_valor" id="presupuestoTotal">
-                        {formatearMoneda(totalIngresos)}
+                        {
+                            totalIngresos ? 
+                            ( formatearMoneda(totalIngresos)) :
+                            ( <Spinner />)
+                        }
                     </div>
                 </div>
             </div>
@@ -159,7 +165,7 @@ const Ingresos = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginacionData.map((ingreso) => (
+                        { ingresos != 0 ?  (paginacionData.map((ingreso) => (
                             <tr key={ingreso.UUID}>
                                 <td>{formatearMoneda(ingreso.valor)}</td>
                                 <td className="ocultar">{ingreso.concepto}</td>
@@ -181,8 +187,11 @@ const Ingresos = () => {
                                         ingresoId={ingresoId} />
                                 </td>
                             </tr>
-                        ))}
-
+                        ))) : (
+                            <div style={{ padding: "10px 0" }}>
+                            <LoadingData />
+                        </div>
+                        )}
                     </tbody>
                 </table>
                 <div className="paginacion">

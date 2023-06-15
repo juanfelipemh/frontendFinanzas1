@@ -4,6 +4,7 @@ import { Chart, LineElement, PointElement, LinearScale, Title } from 'chart.js';
 import { useEffect, useState } from 'react';
 import { Line } from 'react-chartjs-2';
 import { BACKEND_URL } from '../../config/url';
+import Spinner from '../../helpers/spinner';
 
 const GraficoSaldos = () => {
   ChartJS.register(ArcElement, Tooltip, Legend, CategoryScale);
@@ -117,7 +118,7 @@ const GraficoSaldos = () => {
 
   return (
     <div>
-      {datosGrafica && <Line options={options} data={datosGrafica} />}
+      {datosGrafica ? ( <Line options={options} data={datosGrafica} /> ) : ( <Spinner />)}
     </div>
   );
 };
