@@ -3,7 +3,7 @@ import axios from 'axios';
 import { Pie } from 'react-chartjs-2';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import { BACKEND_URL } from '../../config/url';
-import Spinner from '../../helpers/spinner';
+import {Spinner} from '../../helpers/spinner';
 
 
 const GraficoGastosFijos = () => {

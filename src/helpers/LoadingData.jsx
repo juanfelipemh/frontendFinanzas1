@@ -1,11 +1,9 @@
 import './loadingdata.css'
 
-const LoadingData = () => {
+export const LoadingData = () => {
   return (
     <>
         <div className="lds-facebook"><div></div><div></div><div></div></div>
     </>
   )
 }
-
-export default LoadingData

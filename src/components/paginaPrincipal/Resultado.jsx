@@ -10,8 +10,8 @@ import { formatearMoneda } from "../../helpers/formatoMoneda"
 import GraficoPagPrinc from "../grafico/GraficoPagPrinc"
 import Paginacion from "../../helpers/Paginacion"
 import { BACKEND_URL } from "../../config/url"
-import Spinner from "../../helpers/spinner"
-import LoadingData from "../../helpers/LoadingData"
+import {Spinner} from "../../helpers/spinner"
+import {LoadingData} from "../../helpers/LoadingData"
 
 const Resultado = () => {
 
