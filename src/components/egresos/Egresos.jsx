@@ -9,8 +9,8 @@ import { formatearMoneda } from '../../helpers/formatoMoneda'
 import GraficoEgresos from '../grafico/GraficoEgresos'
 import Paginacion from '../../helpers/Paginacion'
 import { BACKEND_URL } from '../../config/url'
-import Spinner from '../../helpers/spinner'
-import LoadingData from '../../helpers/LoadingData'
+import {Spinner} from '../../helpers/spinner'
+import {LoadingData} from '../../helpers/LoadingData'
 
 
 const Egresos = () => {

@@ -4,10 +4,9 @@ import axios from 'axios'
 import Swal from 'sweetalert2'
 import ModalAgregarConcepto from './ModalAgregarConcepto'
 import ModalEditarConcepto from './ModalEditarConcepto'
-import ModalConcepto from './ModalConcepto'
 import Paginacion from '../../helpers/Paginacion'
 import { BACKEND_URL } from '../../config/url'
-import LoadingData from '../../helpers/LoadingData'
+import {LoadingData} from '../../helpers/LoadingData'
 
 const Conceptos = () => {
 
