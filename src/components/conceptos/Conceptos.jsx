@@ -7,11 +7,11 @@ import ModalEditarConcepto from './ModalEditarConcepto'
 import ModalConcepto from './ModalConcepto'
 import Paginacion from '../../helpers/Paginacion'
 import { BACKEND_URL } from '../../config/url'
+import LoadingData from '../../helpers/LoadingData'
 
 const Conceptos = () => {
 
     const [conceptos, setConceptos] = useState([])
-    const [modalOpenDetalle, setModalOpenDetalle] = useState(false);
     const [modalOpenEdit, setModalOpenEditar] = useState(false);
     const [modalOpenAgregar, setModalOpenAgregar] = useState(false)
     const [conceptoId, setConceptoId] = useState(null)
@@ -36,14 +36,7 @@ const Conceptos = () => {
     }
 
     // Manejo de la ventana modal
-    const handleOpenModalDetalle = (id) => {
-        setConceptoId(id)
-        setModalOpenDetalle(true);
-    };
 
-    const handleCloseModalDetalle = () => {
-        setModalOpenDetalle(false);
-    };
 
     const handleOpenModalEditar = (id) => {
         setConceptoId(id);
@@ -145,9 +138,9 @@ const Conceptos = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginacionData.map((concepto) => (
+                        {conceptos != 0 ? (paginacionData.map((concepto) => (
                             <tr key={concepto.UUID}>
-                                <td className="ocultar">{concepto.concepto}</td>
+                                <td >{concepto.concepto}</td>
                                 <td>
                                     <button onClick={() => handleOpenModalEditar(concepto.UUID)} className="btn-editar">
                                         Editar
@@ -157,15 +150,14 @@ const Conceptos = () => {
                                 <td>
                                     <button className="btn-eliminar" onClick={() => handleClick(concepto.UUID)}>Eliminar</button>
                                 </td>
-                                <td>
-                                    <button onClick={() => handleOpenModalDetalle(concepto.UUID)} className="btn-detalle">
-                                        Detalle
-                                    </button>
-                                    <ModalConcepto isOpen={modalOpenDetalle} onClose={handleCloseModalDetalle}
-                                        conceptoId={conceptoId} />
-                                </td>
                             </tr>
-                        ))}
+                        )))
+                            :
+                            (<div style={{ padding: "25px 0 0 50px" }}>
+                                <LoadingData />
+                            </div>
+                            )
+                        }
                     </tbody>
                 </table>
                 <div className="paginacion">

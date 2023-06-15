@@ -9,6 +9,8 @@ import { formatearMoneda } from '../../helpers/formatoMoneda'
 import GraficoEgresos from '../grafico/GraficoEgresos'
 import Paginacion from '../../helpers/Paginacion'
 import { BACKEND_URL } from '../../config/url'
+import Spinner from '../../helpers/spinner'
+import LoadingData from '../../helpers/LoadingData'
 
 
 const Egresos = () => {
@@ -116,19 +118,19 @@ const Egresos = () => {
         })
     }
 
-        // Generar Paginación de la página
-        const [paginaActual, setPaginaActual] = useState(1);
-        const itemPorPagina = 8;
-    
-        const invertirDatos = [...egresos].reverse();
-    
-        const paginacionData = invertirDatos.slice((paginaActual - 1) * itemPorPagina, paginaActual * itemPorPagina);
-    
-        const totalPaginas = Math.ceil(egresos.length / itemPorPagina);
-    
-        const handleCambioPagina = (pagina) => {
-            setPaginaActual(pagina)
-        }
+    // Generar Paginación de la página
+    const [paginaActual, setPaginaActual] = useState(1);
+    const itemPorPagina = 8;
+
+    const invertirDatos = [...egresos].reverse();
+
+    const paginacionData = invertirDatos.slice((paginaActual - 1) * itemPorPagina, paginaActual * itemPorPagina);
+
+    const totalPaginas = Math.ceil(egresos.length / itemPorPagina);
+
+    const handleCambioPagina = (pagina) => {
+        setPaginaActual(pagina)
+    }
 
 
     return (
@@ -137,7 +139,13 @@ const Egresos = () => {
                 <div className="ingreso">
                     <div className="ingreso_titulo">Egresos Totales:</div>
                     <div className="ingreso_valor" id="presupuestoTotal">
-                        {formatearMoneda(totalEgresos)}
+                        {
+                            totalEgresos ? (
+                                formatearMoneda(totalEgresos)
+                            ) : (
+                                <Spinner />
+                            )
+                        }
                     </div>
                 </div>
             </div>
@@ -159,7 +167,7 @@ const Egresos = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {paginacionData.map((egreso) => (
+                        {egresos != 0 ? (paginacionData.map((egreso) => (
                             <tr key={egreso.UUID}>
                                 <td>{formatearMoneda(egreso.valor)}</td>
                                 <td className="ocultar">{egreso.concepto}</td>
@@ -182,7 +190,11 @@ const Egresos = () => {
                                         egresoId={egresoId} />
                                 </td>
                             </tr>
-                        ))}
+                        ))) : (
+                            <div style={{ padding: "10px 0" }}>
+                                <LoadingData />
+                            </div>
+                        )}
 
                     </tbody>
                 </table>

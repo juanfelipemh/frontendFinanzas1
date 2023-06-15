@@ -3,6 +3,7 @@ import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import axios from 'axios';
 import { Pie } from 'react-chartjs-2';
 import { BACKEND_URL } from '../../config/url';
+import Spinner from '../../helpers/spinner';
 
 const GraficoIngresos = () => {
 
@@ -78,7 +79,7 @@ const GraficoIngresos = () => {
             {chartData ? (
                 <Pie data={chartData} />
             ) : (
-                <p>Cargando gráfico...</p>
+                <Spinner />
             )
             }
         </div>
