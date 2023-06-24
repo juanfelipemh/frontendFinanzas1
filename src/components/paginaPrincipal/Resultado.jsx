@@ -79,14 +79,14 @@ const Resultado = () => {
         }
     }
 
-
     useEffect(() => {
         obtenerDatos();
         gastosFijo();
     }, [])
 
+    const sumaGastosFijos = gastosFijos.reduce((total, gastosFijos)=> 
+        total + gastosFijos.valor, 0)
 
-    // Eliminar un gasto
     const eliminarGastoFijo = async (id) => {
         const token = localStorage.getItem('token');
         try {
@@ -163,7 +163,7 @@ const Resultado = () => {
                 </div>
             </div>
             <div className="contenedor-gastos-fijos">
-                <h2 className="titulo-gasto-fijo">GASTOS FIJOS</h2>
+                <h2 className="titulo-gasto-fijo">TOTAL GASTOS FIJOS: {formatearMoneda(sumaGastosFijos)}</h2>
                 <button onClick={() => handleOpenModalAgregar()} className="btn-agregar">Agregar</button>
                 <ModalAgregarGasto isOpen={modalOpenAgregar} onClose={handleCloseModalAgregar} />
 
